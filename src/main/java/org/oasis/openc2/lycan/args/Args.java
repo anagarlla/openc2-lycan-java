@@ -23,6 +23,7 @@
 package org.oasis.openc2.lycan.args;
 
 import org.oasis.openc2.lycan.types.ArgsResponseType;
+import org.oasis.openc2.lycan.profiles.th.args.ThArgs;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -37,6 +38,7 @@ public class Args {
 	private Long stopTime;
 	private Long duration;
 	private ArgsResponseType responseRequested;
+    private ThArgs th;
 	
 	/**
 	 * Constructor to create the args object
@@ -140,4 +142,15 @@ public class Args {
 		this.duration = duration;
 	}
 		
+    @JsonGetter("th")
+    public ThArgs getTh() {
+        return th;
+    }
+
+    @JsonSetter("th")
+    public Args setTh(ThArgs th) {
+        this.th = th;
+        return this;
+    }
+
 }

@@ -1,13 +1,13 @@
 package org.oasis.openc2.lycan.targets;
 
+import org.oasis.openc2.lycan.profiles.th.targets.ThTarget;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public class Target {
-	// @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private Artifact artifact;
-	// @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private Device device;
 	@JsonUnwrapped
 	private DomainName domainName;
@@ -15,7 +15,6 @@ public class Target {
 	private EmailAddress emailAddress;
 	@JsonUnwrapped
 	private Features features;
-	// @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private File file;
 	@JsonUnwrapped
 	private IdnDomainName idnDomainName;
@@ -23,26 +22,21 @@ public class Target {
 	private IdnEmailAddress idnEmailAddress;
 	@JsonUnwrapped
 	private Ipv4Net ipv4Net;
-	// @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private Ipv4Connection ipv4Connection;
 	@JsonUnwrapped
 	private Ipv6Net ipv6Net;
-	// @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private Ipv6Connection ipv6Connection;
 	@JsonUnwrapped
 	private Iri iri;
 	@JsonUnwrapped
 	private MacAddress macAddress;
-	// @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 	private Process process;
 	@JsonUnwrapped
 	private Properties properties;
 	@JsonUnwrapped
 	private URI uri;
 	// Incluído en la extensión para el perfil THREAT_HUNTING
-	private ThDatasource thDatasource;
-	private ThHunt thHunt;
-	private ThHuntflow thHuntflow;
+	private ThTarget th;
 
 	public Target() {
 	}
@@ -123,23 +117,10 @@ public class Target {
 	public URI getUri() {
 		return uri;
 	}
-
-	// --- PERFIL THREAT HUNTING ---
-	@JsonGetter("th:datasource")
-	public ThDatasource getThDatasource() {
-		return thDatasource;
+	@JsonGetter("th")
+	public ThTarget getTh() {
+		return th;
 	}
-
-	@JsonGetter("th:hunt")
-	public ThHunt getThHunt() {
-		return thHunt;
-	}
-
-	@JsonGetter("th:huntflow")
-	public ThHuntflow getThHuntflow() {
-		return thHuntflow;
-	}
-
 	public Target setArtifact(Artifact artifact) {
 		this.artifact = artifact;
 		return this;
@@ -233,27 +214,15 @@ public class Target {
 		this.uri = uri;
 		return this;
 	}
-
-	// --- PERFIL THREAT HUNTING ---
-	@JsonSetter("th:huntflow")
-	public void setThHuntflow(ThHuntflow thHuntflow) {
-		this.thHuntflow = thHuntflow;
+	@JsonSetter("th")
+	public Target setTh(ThTarget th) {
+		this.th = th;
+		return this;
 	}
 
-	@JsonSetter("th:hunt")
-	public void setThHunt(ThHunt thHunt) {
-		this.thHunt = thHunt;
+	public boolean hasTh() {
+		return th != null;
 	}
-
-	@JsonSetter("th:datasource")
-	public void setThDatasource(ThDatasource thDatasource) {
-		this.thDatasource = thDatasource;
-	}
-
-	public boolean hasThDatasource() {
-		return (thDatasource == null) ? false : true;
-	}
-
 	public boolean hasArtifact() {
 		return (artifact == null) ? false : true;
 	}
